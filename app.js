@@ -47,6 +47,35 @@ sr.reveal(".perfil, .contact__form");
 sr.reveal(".info", { origin: "left", delay: 800 });
 sr.reveal(".skills", { origin: "left", delay: 800 });
 sr.reveal(".about", { origin: "right", delay: 1200 });
-sr.reveal(".projects__card, .services__card, .timeline-item", {
+sr.reveal(".projects__card, .services__card, .timeline-item, .workflow__card, .testimonial__card, .faq__item", {
   interval: 100,
 });
+
+/*=============== FAQ ACCORDION ===============*/
+const faqItems = document.querySelectorAll('.faq__item');
+
+faqItems.forEach((item) => {
+    const faqHeader = item.querySelector('.faq__header');
+
+    faqHeader.addEventListener('click', () => {
+        const openItem = document.querySelector('.faq-open');
+
+        toggleItem(item);
+
+        if(openItem && openItem !== item){
+            toggleItem(openItem);
+        }
+    })
+})
+
+const toggleItem = (item) => {
+    const faqContent = item.querySelector('.faq__content');
+
+    if(item.classList.contains('faq-open')){
+        faqContent.removeAttribute('style');
+        item.classList.remove('faq-open');
+    }else{
+        faqContent.style.height = faqContent.scrollHeight + 'px';
+        item.classList.add('faq-open');
+    }
+}
